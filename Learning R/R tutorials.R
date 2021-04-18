@@ -20,5 +20,11 @@ install.packages("glue") # use when you have errors with running the pipe
 
 gapminder %>% filter(country=="Oman")
 gapminder %>% filter(country=="Oman" & year>="2002")
+head(gapminder)
 gapminder %>%
-  filter(country=="Oman")
+  filter(country=="Oman"|country=="Ghana"& 
+           year>1980 & year<=2000)
+
+china<-gapminder %>% filter(country=="China")
+head(china)
+ # Using GGplot2 
