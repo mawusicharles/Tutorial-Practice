@@ -1,0 +1,79 @@
+---
+title: 'Lecture #'
+author: "Charles Mawusi"
+date: "4/28/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+
+## Using Pipes
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+library(gapminder)
+head(gapminder)
+tail(gapminder)
+library(dplyr)
+```
+
+```{r}
+Ghana<- gapminder %>%  
+  filter(country=="Ghana")
+
+```
+
+```{r}
+lm(pop~gdpPercap, data = Ghana) %>% summary()
+
+```
+
+```{r}
+gapminder %>%  
+  filter(country=="Ghana") %>% 
+  lm(pop~gdpPercap, data = .) %>%  summary()
+```
+```{r}
+gapminder %>% str()
+dim(gapminder)
+ 
+```
+
+
+```{r}
+set.seed(413)
+Ghana %>% 
+  sample_n(size =6, replace = TRUE)
+ 
+```
+
+```{r}
+Ghana %>% select(country, year, pop)
+
+```
+```{r}
+head(gapminder)
+gapminder %>% 
+  filter(continent=="Africa", country==c("Nigeria", "Ghana", "Togo"))%>%
+  mutate(lifexp_Pop=(lifeExp/pop), percLiexp=(lifeExp/pop)*100, Gh= ifelse(country=="Ghana", 1, 0), TG=ifelse(country=="Togo", 1, 0)) %>% 
+  head(10)
+```
+# Conditional statements using case_when note: case when doesnt like NA
+
+```{r}
+Nedata<-gapminder %>% mutate(gdp_ordinal=case_when(gdpPercap<2000~"low", gdpPercap>=2000 & gdpPercap<10000~ "medium", TRUE~"High" )) 
+```
+
+```{r}
+
+head(Nedata)
+Nedata %>% filter(country="Afghanistan")
+  hist(gdp_ordinal)
+```
+

@@ -1,0 +1,57 @@
+---
+title: "Lab 1"
+author: "Charles Mawusi"
+date: "4/26/2021"
+output: html_document
+---
+```{r, echo=T}
+summary(swiss)
+str(swiss)
+swiss[, c(2, 3)]
+
+```
+
+```{r}
+library(pander)
+pander(swiss, split.tables=120)
+
+```
+### Getting Column Means 
+```{r, echo=TRUE}
+colMeans(swiss) # or we can use apply as follows:
+
+apply(swiss, 2,  mean)
+
+```
+The mean f fertilizer is `r mean(swiss$Fertility)`
+
+```{r}
+apply(swiss, 2,  summary)
+
+```
+```{r}
+  head(data.frame(apply(swiss, 1, mean)))
+```
+```{r}
+head(data.frame(apply(swiss, 2, round)))
+```
+
+```{r}
+library(dplyr)
+
+data2<-swiss %>% 
+  mutate(new =Fertility*100 )
+head(data2)
+```
+  
+```{r}
+plot(density(data2$new))
+
+
+```
+```{r}
+library(ggplot2)
+ggplot(swiss, aes(Catholic, Fertility))+geom_point()+geom_smooth()
+```
+
+

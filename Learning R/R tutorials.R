@@ -28,3 +28,20 @@ gapminder %>%
 china<-gapminder %>% filter(country=="China")
 head(china)
  # Using GGplot2 
+library(ggplot2)
+ggplot(data = china, aes(x=year, y=lifeExp))+geom_point(col="red", size=3) +xlab("Year ")+ylab("Life Expectancy ") +ggtitle("Life Ecpectancy") +theme_bw()ggplot(data = china, aes(x=year, y=lifeExp))+geom_point(col="red", size=3) +xlab("Year ")+ylab("Life Expectancy ") +ggtitle("Life Ecpectancy") +theme_bw()
+
+ggplot(data=china, aes(x=year, y=gdpPercap))+geom_line(col="red", size=2)+xlim(1940, 2016)+scale_y_log10(breaks=c(1995,2000,  2005, 2010))
+
+#################################################################################################################
+
+y<-seq(1, 20)+rnorm(20)
+x<-seq(1, 20)
+mydata<-data.frame(x,y)
+model1<-lm(y~x, data=mydata)
+summary(model1)
+
+######################################################################################################################
+
+
+install.packages("ggplot2")
